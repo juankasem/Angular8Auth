@@ -14,10 +14,26 @@ export class AccountService {
   //Login Url Address
   private baseLoginUrl : string = "/api/Account/Login";
 
+  //Register Url Address
+  private baseRegisterUrl : string = "/api/Account/Register";
+
   //User related properties
   private loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
   private userName = new BehaviorSubject<string>(localStorage.getItem('username'));
   private userRole = new BehaviorSubject<string>(localStorage.getItem('userRole'));
+
+  //Register Method
+  register(username : string, password : string, email : string)
+  {
+    return this.httpClient.post<any>(this.baseRegisterUrl, {username, password, email}).pipe(
+      map(result =>{
+             //if registration is successful
+             return result;
+      }, err =>{
+        return err;
+      })
+    )
+  }
 
   //Login Method
   login(username : string, password : string)
@@ -38,6 +54,7 @@ export class AccountService {
     )
   }
    
+  //Logout Method
   logout() {
     //Set LoginStatus to false & Delete saved jwt cookies
     this.loginStatus.next(false);
