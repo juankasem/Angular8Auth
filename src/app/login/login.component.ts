@@ -41,9 +41,10 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = false;
       console.log(this.returnUrl);
       this.router.navigateByUrl(this.returnUrl);
-    }, err =>{
+    }, err =>
+    {
       this.invalidLogin = true;
-      this.errorMessage = "Invalid Username/Password. please try again";
+      this.errorMessage = err.error.loginError; 
     })
   }
 }

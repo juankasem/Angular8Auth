@@ -28,6 +28,7 @@ export class AccountService {
     return this.httpClient.post<any>(this.baseRegisterUrl, {username, password, email}).pipe(
       map(result =>{
              //if registration is successful
+
              return result;
       }, err =>{
         return err;
@@ -47,6 +48,8 @@ export class AccountService {
             localStorage.setItem('username', result.username);
             localStorage.setItem('userRole', result.userRole);
             localStorage.setItem('expiration', result.expiration);
+            this.userName.next(localStorage.getItem('username'));
+            this.userRole.next(localStorage.getItem('userRole'));
            }
 
            return result;
