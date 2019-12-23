@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import {ModalModule} from 'ngx-bootstrap/modal';
@@ -17,7 +16,6 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     NavMenuComponent,
     LoginComponent,
     RegistrationComponent,
-    ProductsComponent,
     HomeComponent
   ],
   imports: [

@@ -51,7 +51,6 @@ export class AccountService {
             this.userName.next(localStorage.getItem('username'));
             this.userRole.next(localStorage.getItem('userRole'));
            }
-
            return result;
       })
     )
@@ -73,6 +72,10 @@ export class AccountService {
 
   checkLoginStatus() : boolean
   {
+      var loginCookie = localStorage.getItem("loginStatus");
+      if (loginCookie == "1"){
+        return true;
+      }
       return false;
   }
 
