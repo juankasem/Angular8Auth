@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-product-details',
@@ -9,6 +9,8 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor() { }
   
+ 
+
   ngOnInit() {
   }
 
