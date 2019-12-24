@@ -8,8 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import {ModalModule} from 'ngx-bootstrap/modal';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { DataTablesModule } from 'angular-datatables';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +24,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    DataTablesModule,
     ModalModule.forRoot()
   ],
   providers: [],

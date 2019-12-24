@@ -1,11 +1,11 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ProductsRoutingModule } from './products-routing.module';
+import { DataTablesModule } from 'angular-datatables'; 
+
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-
 @NgModule({
   declarations: [
     ProductListComponent,
@@ -15,7 +15,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     CommonModule,
     ProductsRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ]
 })
 export class ProductsModule { }
