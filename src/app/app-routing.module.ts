@@ -9,9 +9,9 @@ import { RegistrationComponent } from './registration/registration.component';
 const routes: Routes = [
   { path : '', component : HomeComponent, pathMatch: 'full'},
   { path : 'home', component : HomeComponent},
-  { path: 'login', component: LoginComponent},
+  { path : 'login', component: LoginComponent},
   { path : 'register', component : RegistrationComponent},
-  { path : 'products', loadChildren: './products/products.module#ProductsModule' },
+  { path : 'products', loadChildren: './products/products.module#ProductsModule'},
   { path : 'access-denied', component: AccessDeniedComponent },
   { path : '**', component : HomeComponent}
 
