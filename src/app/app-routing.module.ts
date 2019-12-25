@@ -1,3 +1,4 @@
+import { AccessDeniedComponent } from './errors/access-denied/access-denied.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path : 'register', component : RegistrationComponent},
   { path : 'products', loadChildren: './products/products.module#ProductsModule' },
+  { path : 'access-denied', component: AccessDeniedComponent },
   { path : '**', component : HomeComponent}
 
 ];

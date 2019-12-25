@@ -10,13 +10,15 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DataTablesModule } from 'angular-datatables';
+import { AccessDeniedComponent } from './errors/access-denied/access-denied.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     LoginComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    AccessDeniedComponent
   ],
   imports: [
     FormsModule,
