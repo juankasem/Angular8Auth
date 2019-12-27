@@ -3,6 +3,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductListComponent } from './product-list/product-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', component: ProductListComponent, canActivate: [AuthGuardService]},
@@ -13,8 +14,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers : [
-    AuthGuardService
-  ]
+ 
 })
 export class ProductsRoutingModule { }
