@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http'
 import { BehaviorSubject} from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -73,8 +74,35 @@ export class AccountService {
   checkLoginStatus() : boolean
   {
       var loginCookie = localStorage.getItem("loginStatus");
-      if (loginCookie == "1"){
-        return true;
+      
+      if (loginCookie == "1")
+      {
+        if(localStorage.getItem('jwt') === null || localStorage.getItem('jwt') === undefined)
+        {
+          return false;
+        }
+        
+        //get & decode the token
+        const token = localStorage.getItem('jwt');
+        const decoded = jwt_decode(token);
+
+        //check if the cookie is valid
+        if (decoded.exp === undefined){
+            return false;
+        }
+        //Get current Date Time
+        const date = new Date(0);
+
+        //convert exp time to UTC
+         let tokenExpDate = date.setUTCSeconds(decoded.exp);
+        
+         //if value of token is greater than current time, then it's valid
+         if (tokenExpDate.valueOf() > new Date().valueOf())
+         {
+           return true;
+         }
+
+        return false;
       }
       return false;
   }
