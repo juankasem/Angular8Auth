@@ -1,7 +1,7 @@
 import { ProductService } from './../../services/product.service';
 import { Observable, from } from 'rxjs';
 import { Product } from './../../interfaces/product';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { DataTableDirective } from 'angular-datatables';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
 
   //For the adding product form
    insertForm : FormGroup;
@@ -49,9 +49,11 @@ export class ProductListComponent implements OnInit {
    dtTrigger : Subject<any> = new Subject();
 
    @ViewChild(DataTableDirective, {static : false}) dtElement : DataTableDirective;
+
   constructor(private productService : ProductService, 
               private modalService : BsModalService,
-              private fb : FormBuilder) { }
+              private fb : FormBuilder,
+              private chRef : ChangeDetectorRef) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -64,6 +66,7 @@ export class ProductListComponent implements OnInit {
      this.products$ = this.productService.getProducts();
       this.products$.subscribe(res => {
        this.products = res;
+       this.chRef.detectChanges();
        this.dtTrigger.next()
      });
     
@@ -84,11 +87,116 @@ export class ProductListComponent implements OnInit {
       'price' : this.price,
       'imageUrl' : this.imageUrl,
       'outOfStock' : true
-    })
+    });
+
+    //Initialize Update product properties
+    this.updatedName = new FormControl('', [Validators.required, Validators.maxLength(50)]);
+    this.updatedDescription = new FormControl('', [Validators.required, Validators.min(0), Validators.max(10000)]);
+    this.updatedPrice = new FormControl('', [Validators.required, Validators.maxLength(150)]);
+    this.updatedImageUrl = new FormControl('', Validators.pattern(validateImageUrl));
+    this.id = new FormControl();
+
+    this.updateForm = this.fb.group({
+      'id' : this.id,
+      'updatedName' : this.updatedName,
+      'updatedDescription' : this.updatedDescription,
+      'updatedPrice' : this.updatedPrice,
+      'updatedImageUrl' : this.updatedImageUrl,
+      'outOfStock' : true
+    });
   }
 
   onAddProduct()
   {
     this.modalRef = this.modalService.show(this.modal);  
   }
+
+  onSubmit()
+  {
+    let newProduct = this.insertForm.value;
+
+    this.productService.insertProduct(newProduct).subscribe(res =>{
+         this.productService.clearCache();
+         this.products$ = this.productService.getProducts();
+
+         this.products$.subscribe(newList =>{
+           this.products = newList;
+           this.modalRef.hide();
+           this.insertForm.reset();
+           this.reRender();         
+         });
+         console.log("New Product added.")
+    }, err =>{
+
+    })
+  }
+
+  //Load the update modal
+  onUpdateModal(product : Product) : void
+  {
+     this.id.setValue(product.productId);
+     this.updatedName.setValue(product.name);
+     this.updatedDescription.setValue(product.description);
+     this.updatedPrice.setValue(product.price);
+     this.updatedImageUrl.setValue(product.imageUrl);
+
+     this.updateForm.setValue({
+      'id' : this.id,
+      'updatedName' : this.updatedName,
+      'updatedDescription' : this.updatedDescription,
+      'updatedPrice' : this.updatedPrice,
+      'updatedImageUrl' : this.updatedImageUrl,
+      'outOfStock' : true
+    });
+
+    this.modalRef = this.modalService.show(this.editModal);
+  }
+
+   //Update an existing product
+  onUpdate()
+  {
+      let editedProduct = this.updateForm.value;
+      this.productService.updateProduct(editedProduct.id, editedProduct).subscribe(res =>{
+        console.log('product updated');
+        this.productService.clearCache();
+        this.products$ = this.productService.getProducts();
+        this.products$.subscribe(updatedList =>{
+            this.products = updatedList;
+            this.modalRef.hide();
+            this.reRender();
+        });
+      });
+  }
+
+  //method to delete Product
+  onDelete(product : Product) : void
+  {
+    this.productService.deleteProduct(product.productId).subscribe(res =>{
+      this.productService.clearCache();
+      this.products$ = this.productService.getProducts();
+      this.products$.subscribe(newList =>
+        {
+         this.products = newList;
+         this.reRender();
+      })
+    })
+  }
+
+  // We will use this method to destroy old table and re-render new table
+   reRender(){
+      this.dtElement.dtInstance.then((dtInstance : DataTables.Api) =>{
+        
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+        
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next()
+      })
+   }
+   
+   ngOnDestroy()
+   {
+     //Unsbscribe from the dataTable
+     this.dtTrigger.unsubscribe();
+   }
 }

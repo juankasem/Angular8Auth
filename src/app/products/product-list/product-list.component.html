@@ -112,7 +112,7 @@
     </div>
   </ng-template>
   
-  <!-- ADD PRODUCT MODAL START-->
+  <!-- ADD PRODUCT MODAL END-->
   
   
   
@@ -129,7 +129,7 @@
       <p class="list-group-item active text-center text-uppercase">{{modalMessage}}</p>
       <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
         <ul class="list-group">
-          <li class="list-group-item" [hidden]="_id">
+          <li class="list-group-item" [hidden]="id">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="productId"><i class="fa fa-key"></i></span>
