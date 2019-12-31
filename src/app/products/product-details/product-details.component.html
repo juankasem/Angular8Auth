@@ -1,1 +1,117 @@
-<p>product-details works!</p>
+<ng-template #noproduct>
+    <h2>No Product to Display</h2>
+  </ng-template>
+  
+  <div class="container" *ngIf="product;else noproduct">
+    <div class="card">
+      <div class="row">
+        <aside class="col-sm-5 border-right">
+          <article class="gallery-wrap">
+            <div class="img-big-wrap">
+              <div> <a href="#"><img [src]="product.imageUrl" /></a></div>
+            </div> <!-- slider-product.// -->
+            <div class="img-small-wrap">
+              <div class="item-gallery"> <img [src]="product.imageUrl" /> </div>
+              <div class="item-gallery"> <img [src]="product.imageUrl" /> </div>
+              <div class="item-gallery"> <img [src]="product.imageUrl" /> </div>
+              <div class="item-gallery"> <img [src]="product.imageUrl" /> </div>
+            </div> <!-- slider-nav.// -->
+          </article> <!-- gallery-wrap .end// -->
+        </aside>
+        <aside class="col-sm-7">
+          <article class="card-body p-5">
+            <h3 class="title mb-3">{{product.name | uppercase}}</h3>
+  
+            <p class="price-detail-wrap">
+              <span class="price h3 text-warning">
+                <span class="currency">CAD </span><span class="num">{{product.price | currency:'CAD':'symbol-narrow':'.2'}}</span>
+              </span>
+  
+            </p> <!-- price-detail-wrap .// -->
+  
+            <dl class="item-property">
+              <dt class="text-uppercase text-primary"><u>Description</u></dt>
+              <dd>
+                <p>
+                  {{product.description}}
+                </p>
+              </dd>
+            </dl>
+            <hr>
+  
+            <div class="row">
+              <div class="col-sm-4">
+                <dl class="param param-feature">
+                  <dt class="text-uppercase text-primary"><u>Model#</u></dt>
+                  <dd>12345611</dd>
+                </dl>  <!-- item-property-hor .// -->
+              </div>
+              <div class="col-sm-4">
+                <dl class="param param-feature">
+                  <dt class="text-uppercase text-primary"><u>Select Color</u></dt>
+                  <dd>
+                    <div class="color-select">
+                      <input type="radio" name="colorPicked" id="silver" value="small" checked />
+                      <label class="silver" for="silver"></label>
+  
+                      <input type="radio" name="colorPicked" id="gold" value="small" />
+                      <label class="gold" for="gold"></label>
+  
+                      <input type="radio" name="colorPicked" id="grey" value="small" />
+                      <label class="grey" for="grey"></label>
+                    </div>
+                  </dd>
+                </dl>  <!-- item-property-color pick .// -->
+              </div>
+              <div class="col-sm-4">
+                <dl class="param param-feature">
+                  <dt class="text-uppercase text-primary"><u>In STOCK</u></dt>
+                  <dd>{{true == product.outofstock ? 'No': 'Yes'}}</dd>
+                </dl>  <!-- item-property-hor .// -->
+              </div>
+            </div>
+  
+  
+  
+            <hr>
+            <div class="row">
+              <div class="col-sm-5">
+                <dl class="param param-inline">
+                  <dt class="text-uppercase text-primary"><u>Quantity</u></dt>
+                  <dd>
+                    <select class="form-control form-control-sm" style="width:70px;">
+                      <option> 1 </option>
+                      <option> 2 </option>
+                      <option> 3 </option>
+                    </select>
+                  </dd>
+                </dl>
+              </div> <!-- col.// -->
+              <div class="col-sm-7">
+                <dl class="param param-inline">
+                  <dt class="text-uppercase text-primary"><u>RAM Size</u></dt>
+                  <dd>
+                    <label class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <span class="form-check-label">8 GB</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <span class="form-check-label">16 Gb</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <span class="form-check-label">32 GB</span>
+                    </label>
+                  </dd>
+                </dl>  <!-- item-property .// -->
+              </div> <!-- col.// -->
+            </div> <!-- row.// -->
+            <hr>
+            <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
+            <a href="#" class="btn btn-lg btn-outline-primary text-uppercase ml-2"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+          </article> <!-- card-body.// -->
+        </aside> <!-- col.// -->
+      </div> <!-- row.// -->
+    </div> <!-- card.// -->
+  </div>

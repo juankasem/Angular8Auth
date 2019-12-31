@@ -1,3 +1,4 @@
+import { AccountService } from './../../services/account.service';
 import { ProductService } from './../../services/product.service';
 import { Observable, from } from 'rxjs';
 import { Product } from './../../interfaces/product';
@@ -6,6 +7,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -50,10 +52,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
    @ViewChild(DataTableDirective, {static : false}) dtElement : DataTableDirective;
 
-  constructor(private productService : ProductService, 
+  constructor(private accountService : AccountService,
+              private productService : ProductService, 
               private modalService : BsModalService,
               private fb : FormBuilder,
-              private chRef : ChangeDetectorRef) { }
+              private chRef : ChangeDetectorRef,
+              private router : Router) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -69,6 +73,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
        this.chRef.detectChanges();
        this.dtTrigger.next()
      });
+
+    this.accountService.currentUserRole.subscribe(res =>{
+      this.userRoleStatus = res;
+    })
     
    //Modal message
    this.modalMessage = "All fields are mandatory";
@@ -167,7 +175,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
         });
       });
   }
-
+  
   //method to delete Product
   onDelete(product : Product) : void
   {
@@ -181,6 +189,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
       })
     })
   }
+   
+  //method to diplay product details
+  onSelect(product : Product) : void
+   {
+     this.selectedProduct = product;
+     this.router.navigateByUrl("/products/" + product.productId);
+   }
 
   // We will use this method to destroy old table and re-render new table
    reRender(){
