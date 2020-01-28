@@ -1,0 +1,15 @@
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.csproj.CoreCompileInputs.cache
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.AssemblyInfoInputs.cache
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.AssemblyInfo.cs
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\bin\Debug\netcoreapp2.1\AuthWithAngular8.deps.json
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\bin\Debug\netcoreapp2.1\AuthWithAngular8.runtimeconfig.json
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\bin\Debug\netcoreapp2.1\AuthWithAngular8.runtimeconfig.dev.json
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\bin\Debug\netcoreapp2.1\AuthWithAngular8.dll
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\bin\Debug\netcoreapp2.1\AuthWithAngular8.pdb
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.csprojAssemblyReference.cache
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.RazorAssemblyInfo.cache
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.RazorAssemblyInfo.cs
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.RazorTargetAssemblyInfo.cache
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.dll
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\AuthWithAngular8.pdb
+C:\Users\KErem\source\repos\AuthWithAngular8\AuthWithAngular8\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
